@@ -1,18 +1,21 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list bordered>
+    <q-list bordered separator>
       <q-item
-        v-ripple
         v-for="task in tasks"
         :key="task.id"
         @click="task.completed = !task.completed"
+        :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
         clickable
+        v-ripple
       >
         <q-item-section side top>
           <q-checkbox v-model="task.completed" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>{{ task.name }}</q-item-label>
+          <q-item-label :class="task.completed ? 'text-strike' : ''">{{
+            task.name
+          }}</q-item-label>
           <q-item-label caption> </q-item-label>
         </q-item-section>
         <q-item-section side>
