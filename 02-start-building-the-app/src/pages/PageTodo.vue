@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <q-list bordered separator>
-      <q-item
+      <!--<q-item
         v-for="(task, key) in tasks"
         :key="key"
         @click="task.completed = !task.completed"
@@ -34,7 +34,16 @@
             </div>
           </div>
         </q-item-section>
-      </q-item>
+      </q-item>-->
+
+            <task
+        v-for="(task, key) in tasks"
+        :key="key"
+        :task="task"
+        :id="key"
+      ></task>
+      
+
     </q-list>
   </q-page>
 </template>
@@ -48,5 +57,8 @@ export default defineComponent({
   computed: {
     ...mapGetters("tasks", ["tasks"]),
   },
+    components: {
+    'task': require('components/Tasks/Task.vue').default
+  }
 });
 </script>
