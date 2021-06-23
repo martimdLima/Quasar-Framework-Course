@@ -6,7 +6,7 @@ const state = {
       name: "Go to Shop",
       dueDate: "2021/06/22",
       dueTime: "18:30",
-      completed: false,
+      completed: true,
     },
     ID2: {
       name: "Go to Post Office",
@@ -56,9 +56,35 @@ const actions = {
 };
 
 const getters = {
-  tasks: (state) => {
-    return state.tasks;
+  tasksTodo: (state) => {
+      let tasks = {};
+
+      const taskKeys = Object.keys(state.tasks).forEach(function (key) {
+        let task = state.tasks[key];
+
+        if(!task.completed) {
+            tasks[key] = task;
+        }
+      });
+
+
+    return tasks;
   },
+  tasksCompleted: (state) => {
+    let tasks = {};
+
+    const taskKeys = Object.keys(state.tasks).forEach(function (key) {
+      let task = state.tasks[key];
+
+      if(task.completed) {
+          tasks[key] = task;
+      }
+    });
+
+
+  return tasks;
+},
+
 };
 
 export default {
