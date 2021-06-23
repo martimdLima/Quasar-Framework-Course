@@ -1,10 +1,7 @@
 <template>
   <q-card>
-    <q-card-section class="row">
-      <div class="text-h6">Add Task</div>
-      <q-space />
-      <q-btn v-close-popup flat round dense icon="close" />
-    </q-card-section>
+    <modal-header>Add Task
+    </modal-header>
 
     <q-form @submit.prevent="submitForm" ref="taskForm">
       <q-card-section>
@@ -83,6 +80,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import ModalHeader from './Shared/ModalHeader.vue';
 
 export default {
   data() {
@@ -91,9 +89,12 @@ export default {
         name: "",
         dueDate: "",
         dueTime: "",
-        completed: false,
+        completed: true,
       },
     };
+  },
+  components: {
+      "modal-header" : require("components/Tasks/Modals/Shared/ModalHeader.vue").default
   },
   methods: {
     ...mapActions("tasks", ["addTask"]),
