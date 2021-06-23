@@ -56,7 +56,7 @@ export default {
         cancel: true,
         persistent: true
       }).onOk(() => {
-        console.log('Deleting item')
+          this.deleteTask(this.id);
       })
     }
 
