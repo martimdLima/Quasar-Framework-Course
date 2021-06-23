@@ -1,6 +1,6 @@
 <template>
   <q-card>
-    <modal-header>Add Task </modal-header>
+    <modal-header>Edit Task </modal-header>
 
     <q-form @submit.prevent="submitForm" ref="taskForm">
       <q-card-section>
@@ -28,14 +28,10 @@ import { mapActions } from "vuex";
 import ModalButtons from "./Shared/ModalButtons.vue";
 
 export default {
+  props: ["editTask", "id"],
   data() {
     return {
-      taskToSubmit: {
-        name: "",
-        dueDate: "",
-        dueTime: "",
-        completed: false,
-      },
+      taskToSubmit: {},
     };
   },
   components: {
@@ -51,7 +47,7 @@ export default {
       .default,
   },
   methods: {
-    ...mapActions("tasks", ["addTask"]),
+    ...mapActions("tasks", ["updateTask"]),
     submitForm() {
       this.$refs.taskForm.validate().then((success) => {
         if (success) {
@@ -67,9 +63,15 @@ export default {
     },
     submitTask() {
       //console.log("submitTask");
-      this.addTask(this.taskToSubmit);
+      this.updateTask({
+        id: this.id,
+        updates: this.taskToSubmit,
+      });
       this.$emit("close");
     },
+  },
+  mounted() {
+    this.taskToSubmit = Object.assign({}, this.editTask);
   },
 };
 </script>
