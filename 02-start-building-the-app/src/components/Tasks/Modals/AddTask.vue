@@ -1,7 +1,9 @@
 <template>
   <q-card>
-    <q-card-section>
-      <div class="text-h6">Alert</div>
+    <q-card-section class="row">
+      <div class="text-h6">Add Task</div>
+      <q-space />
+      <q-btn v-close-popup flat round dense icon="close" />
     </q-card-section>
 
     <q-card-section class="q-pt-none">
