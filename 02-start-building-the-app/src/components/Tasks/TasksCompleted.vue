@@ -1,7 +1,7 @@
 <template>
   <div class="q-mt-lg">
     <list-header :color="bgColor">Completed</list-header>
-    <q-list v-if="Object.keys(tasksCompleted).length" bordered separator>
+    <q-list bordered separator>
       <task
         v-for="(task, key) in tasksCompleted"
         :key="key"

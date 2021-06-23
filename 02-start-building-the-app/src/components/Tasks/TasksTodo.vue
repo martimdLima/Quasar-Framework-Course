@@ -1,7 +1,7 @@
 <template>
   <div>
     <list-header :color="bgColor">Todo</list-header>
-    <q-list v-if="Object.keys(tasksTodo).length" bordered separator>
+    <q-list bordered separator>
       <task
         v-for="(task, key) in tasksTodo"
         :key="key"
