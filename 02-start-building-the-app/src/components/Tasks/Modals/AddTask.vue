@@ -6,32 +6,9 @@
       <q-card-section>
         <modal-task-name v-model:name="taskToSubmit.name" />
 
-        <div class="row q-mb-sm">
-          <q-input
-            ref="dueDate"
-            clearable
-            outlined
-            label="Due Date"
-            v-model="taskToSubmit.dueDate"
-            :rules="['date']"
-          >
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy
-                  ref="qDateProxy"
-                  transition-show="scale"
-                  transition-hide="scale"
-                >
-                  <q-date v-model="taskToSubmit.dueDate">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+        <modal-task-due-date v-model:dueDate="taskToSubmit.dueDate"/>
+
+       
 
         <div v-if="taskToSubmit.dueDate" class="row q-mb-sm">
           <q-input
@@ -66,8 +43,6 @@
 
 <script>
 import { mapActions } from "vuex";
-import ModalHeader from "./Shared/ModalHeader.vue";
-import ModalTaskName from "./Shared/ModalTaskName.vue";
 
 export default {
   data() {
@@ -85,6 +60,8 @@ export default {
       .default,
     "modal-task-name":
       require("components/Tasks/Modals/Shared/ModalTaskName.vue").default,
+       "modal-task-due-date":
+      require("components/Tasks/Modals/Shared/ModalDueDate.vue").default,
   },
   methods: {
     ...mapActions("tasks", ["addTask"]),
