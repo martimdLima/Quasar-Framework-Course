@@ -1,7 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    
-    <no-tasks v-if="!Object.keys(tasksTodo).length"/>
+    <no-tasks
+      @showAddTask="showAddTaskDialog"
+      v-if="!Object.keys(tasksTodo).length"
+    />
 
     <tasks-todo v-else :tasksTodo="tasksTodo" />
 
