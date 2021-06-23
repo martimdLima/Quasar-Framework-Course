@@ -1,6 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
+    
+    <no-tasks v-if="!Object.keys(tasksTodo).length"/>
+
+    <tasks-todo v-else :tasksTodo="tasksTodo" />
 
     <tasks-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -27,6 +30,7 @@
 import { defineComponent, ref } from "vue";
 import { mapGetters } from "vuex";
 import AddTask from "../components/Tasks/Modals/AddTask.vue";
+import NoTasks from "../components/Tasks/NoTasks.vue";
 import TasksCompleted from "../components/Tasks/TasksCompleted.vue";
 import TasksTodo from "../components/Tasks/TasksTodo.vue";
 
@@ -49,6 +53,7 @@ export default defineComponent({
     AddTask,
     TasksTodo,
     TasksCompleted,
+    NoTasks,
   },
 });
 </script>
