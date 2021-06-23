@@ -1,19 +1,23 @@
 <template>
-  <q-list v-if="Object.keys(tasksTodo).length" bordered separator>
-    <task
-      v-for="(task, key) in tasksTodo"
-      :key="key"
-      :task="task"
-      :id="key"
-    ></task>
-  </q-list>
+  <div>
+    <list-header>Todo</list-header>
+    <q-list v-if="Object.keys(tasksTodo).length" bordered separator>
+      <task
+        v-for="(task, key) in tasksTodo"
+        :key="key"
+        :task="task"
+        :id="key"
+      ></task>
+    </q-list>
+  </div>
 </template>
 
 <script>
+import ListHeader from '../Shared/ListHeader.vue';
 import Task from "./Task.vue";
 
 export default {
-  components: { Task },
+  components: { Task, ListHeader },
   props: ["tasksTodo"],
 };
 </script>
