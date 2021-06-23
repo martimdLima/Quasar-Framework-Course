@@ -30,6 +30,14 @@
         </div>
       </div>
     </q-item-section>
+
+    <q-item-section side>
+
+       <q-btn flat
+        round
+        dense
+        color="red" icon="delete" @click.stop="confirm()" />
+    </q-item-section>
   </q-item>
 </template>
 
@@ -40,6 +48,18 @@ export default {
   props: ["task", "id"],
   methods: {
     ...mapActions("tasks", ["updateTask", "deleteTask"]),
+    
+    confirm () {
+      this.$q.dialog({
+        title: 'Confirm',
+        message: 'Would you like to delete this task?',
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        console.log('Deleting item')
+      })
+    }
+
   },
 };
 </script>
