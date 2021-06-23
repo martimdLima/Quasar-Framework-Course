@@ -1,24 +1,10 @@
 <template>
   <q-card>
-    <modal-header>Add Task
-    </modal-header>
+    <modal-header>Add Task </modal-header>
 
     <q-form @submit.prevent="submitForm" ref="taskForm">
       <q-card-section>
-        <div class="row q-mb-sm">
-          <q-input
-            ref="name"
-            autofocus
-            outlined
-            clearable
-            class="col"
-            v-model="taskToSubmit.name"
-            :rules="[
-              (val) => (val && val.length > 0) || 'Please type something',
-            ]"
-            label="Task Name"
-          />
-        </div>
+        <modal-task-name v-model:name="taskToSubmit.name" />
 
         <div class="row q-mb-sm">
           <q-input
@@ -80,7 +66,8 @@
 
 <script>
 import { mapActions } from "vuex";
-import ModalHeader from './Shared/ModalHeader.vue';
+import ModalHeader from "./Shared/ModalHeader.vue";
+import ModalTaskName from "./Shared/ModalTaskName.vue";
 
 export default {
   data() {
@@ -94,7 +81,10 @@ export default {
     };
   },
   components: {
-      "modal-header" : require("components/Tasks/Modals/Shared/ModalHeader.vue").default
+    "modal-header": require("components/Tasks/Modals/Shared/ModalHeader.vue")
+      .default,
+    "modal-task-name":
+      require("components/Tasks/Modals/Shared/ModalTaskName.vue").default,
   },
   methods: {
     ...mapActions("tasks", ["addTask"]),
