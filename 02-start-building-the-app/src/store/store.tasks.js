@@ -1,5 +1,8 @@
+import { uid } from "quasar";
+
 const state = {
   tasks: {
+    /*
     ID1: {
       name: "Go to Shop",
       dueDate: "22/06/2020",
@@ -18,6 +21,7 @@ const state = {
       dueTime: "09:30",
       completed: false,
     },
+    */
   },
 };
 
@@ -28,6 +32,11 @@ const mutations = {
   deleteTask(state, id) {
     delete state.tasks[id];
   },
+  addTask(state, payload) {
+    //state.tasks[payload.id] = payload.task;
+    const newTask = payload.task;
+    state.tasks = { ...state.tasks, newTask };
+  },
 };
 
 const actions = {
@@ -36,6 +45,15 @@ const actions = {
   },
   deleteTask({ commit }, id) {
     commit("deleteTask", id);
+  },
+  addTask({ commit }, task) {
+    let taskId = uid();
+    const payload = {
+      id: taskId,
+      task: task,
+    };
+
+    commit("addTask", payload);
   },
 };
 
