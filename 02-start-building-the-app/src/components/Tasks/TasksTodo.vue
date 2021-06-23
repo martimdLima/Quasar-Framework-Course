@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-header>Todo</list-header>
+    <list-header :color="bgColor">Todo</list-header>
     <q-list v-if="Object.keys(tasksTodo).length" bordered separator>
       <task
         v-for="(task, key) in tasksTodo"
@@ -13,12 +13,17 @@
 </template>
 
 <script>
-import ListHeader from '../Shared/ListHeader.vue';
+import ListHeader from "../Shared/ListHeader.vue";
 import Task from "./Task.vue";
 
 export default {
   components: { Task, ListHeader },
   props: ["tasksTodo"],
+  data() {
+    return {
+      bgColor: "bg-orange-4",
+    };
+  },
 };
 </script>
 
