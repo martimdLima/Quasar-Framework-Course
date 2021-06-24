@@ -18,8 +18,13 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState("tasks", ["searchBarText"]),
-    searchField() {
-      return this.searchBarText;
+    searchField: {
+      get() {
+        return this.searchBarText;
+      },
+      set(value) {
+        console.log(value);
+      },
     },
   },
 };
