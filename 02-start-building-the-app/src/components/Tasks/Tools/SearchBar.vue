@@ -1,6 +1,7 @@
 <template>
   <q-input
     v-select-all
+    @keyup.esc="clearSearchField"
     class="col"
     outlined
     v-model="searchField"
@@ -36,6 +37,9 @@ export default {
   },
   methods: {
     ...mapActions("tasks", ["setSearchText"]),
+    clearSearchField() {
+      this.searchField = "";
+    },
   },
   directives: {
     selectAll,
