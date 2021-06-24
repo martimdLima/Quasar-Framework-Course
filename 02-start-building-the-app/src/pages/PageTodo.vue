@@ -1,5 +1,9 @@
 <template>
   <q-page class="q-pa-md">
+    <div class="row q-mb-lg">
+      <search-bar></search-bar>
+    </div>
+
     <no-tasks
       @showAddTask="showAddTaskDialog"
       v-if="!Object.keys(tasksTodo).length"
@@ -35,6 +39,7 @@ import AddTask from "../components/Tasks/Modals/AddTask.vue";
 import NoTasks from "../components/Tasks/NoTasks.vue";
 import TasksCompleted from "../components/Tasks/TasksCompleted.vue";
 import TasksTodo from "../components/Tasks/TasksTodo.vue";
+import SearchBar from "../components/Tasks/Tools/SearchBar.vue";
 
 export default defineComponent({
   name: "PageIndex",
@@ -56,6 +61,7 @@ export default defineComponent({
     TasksTodo,
     TasksCompleted,
     NoTasks,
+    SearchBar,
   },
 });
 </script>
