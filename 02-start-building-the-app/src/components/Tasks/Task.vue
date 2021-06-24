@@ -11,8 +11,17 @@
     </q-item-section>
 
     <q-item-section>
-      <q-item-label :class="{ 'text-strike': task.completed }">
+      <q-item-label
+        v-if="!this.searchBarText"
+        :class="{ 'text-strike': task.completed }"
+      >
         {{ task.name }}
+      </q-item-label>
+      <q-item-label
+        v-else
+        :class="{ 'text-strike': task.completed }"
+        v-html="searchBarHighlight"
+      >
       </q-item-label>
     </q-item-section>
 
@@ -23,7 +32,7 @@
         </div>
         <div class="column">
           <q-item-label class="row justify-end" caption>
-            {{ task.dueDate }}
+            {{ formatedDueDate }}
           </q-item-label>
           <q-item-label class="row justify-end" caption>
             <small>{{ task.dueTime }}</small>
@@ -61,7 +70,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
+import { date } from "quasar";
 
 export default {
   props: ["task", "id"],
@@ -89,6 +99,19 @@ export default {
     },
     displayEditTask() {
       this.showEditTask = !this.showEditTask;
+    },
+  },
+  computed: {
+    ...mapState("tasks", ["searchBarText"]),
+    formatedDueDate() {
+      return date.formatDate(this.task.dueDate, "MMM D");
+    },
+    searchBarHighlight() {
+      let searchRegExp = new RegExp(this.searchBarText, "ig");
+
+      return this.task.name.replace(searchRegExp, (match) => {
+        return "<span class='bg-yellow-6'>" + match + "</span>";
+      });
     },
   },
 };
