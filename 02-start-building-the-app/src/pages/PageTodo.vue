@@ -4,12 +4,22 @@
       <search-bar></search-bar>
     </div>
 
+    <p
+      v-if="
+        searchBarText &&
+        !Object.keys(tasksTodo).length &&
+        !Object.keys(tasksCompleted).length
+      "
+    >
+      No search results.
+    </p>
+
     <no-tasks
       @showAddTask="showAddTaskDialog"
-      v-if="!Object.keys(tasksTodo).length"
+      v-if="!Object.keys(tasksTodo).length && !searchBarText"
     />
 
-    <tasks-todo v-else :tasksTodo="tasksTodo" />
+    <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
 
     <tasks-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -34,7 +44,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import AddTask from "../components/Tasks/Modals/AddTask.vue";
 import NoTasks from "../components/Tasks/NoTasks.vue";
 import TasksCompleted from "../components/Tasks/TasksCompleted.vue";
@@ -55,6 +65,7 @@ export default defineComponent({
   },
   computed: {
     ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"]),
+    ...mapState("tasks", ["searchBarText"]),
   },
   components: {
     AddTask,
