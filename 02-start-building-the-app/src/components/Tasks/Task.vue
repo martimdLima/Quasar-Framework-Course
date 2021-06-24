@@ -2,6 +2,7 @@
   <q-item
     @click="updateTask({ id: id, updates: { completed: !task.completed } })"
     :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
+    v-touch-hold:1000.mouse="displayEditTask"
     clickable
     v-ripple
   >
