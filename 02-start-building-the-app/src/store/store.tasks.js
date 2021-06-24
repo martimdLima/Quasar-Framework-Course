@@ -34,6 +34,7 @@ const state = {
     },
   },
   searchBarText: "",
+  sortTerm: "name",
 };
 
 const mutations = {
@@ -50,6 +51,9 @@ const mutations = {
   },
   setSearchText(state, payload) {
     state.searchBarText = payload;
+  },
+  setSortTerm(state, value) {
+    state.sortTerm = value;
   },
 };
 
@@ -72,6 +76,9 @@ const actions = {
   setSearchText({ commit }, value) {
     commit("setSearchText", value);
   },
+  setSortTerm({ commit }, value) {
+    commit("setSortTerm", value);
+  },
 };
 
 const getters = {
@@ -81,8 +88,8 @@ const getters = {
     let keysOrdered = Object.keys(state.tasks);
 
     keysOrdered.sort((a, b) => {
-      let taskA = state.tasks[a].name.toLowerCase();
-      let taskB = state.tasks[b].name.toLowerCase();
+      let taskA = state.tasks[a][state.sortTerm].toLowerCase();
+      let taskB = state.tasks[b][state.sortTerm].toLowerCase();
 
       if (taskA > taskB) {
         return 1;

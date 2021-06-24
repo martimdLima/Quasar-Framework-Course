@@ -2,6 +2,7 @@
   <q-page class="q-pa-md">
     <div class="row q-mb-lg">
       <search-bar></search-bar>
+      <sort></sort>
     </div>
 
     <p
@@ -50,6 +51,7 @@ import NoTasks from "../components/Tasks/NoTasks.vue";
 import TasksCompleted from "../components/Tasks/TasksCompleted.vue";
 import TasksTodo from "../components/Tasks/TasksTodo.vue";
 import SearchBar from "../components/Tasks/Tools/SearchBar.vue";
+import Sort from "../components/Tasks/Tools/Sort.vue";
 
 export default defineComponent({
   name: "PageIndex",
@@ -73,6 +75,7 @@ export default defineComponent({
     TasksCompleted,
     NoTasks,
     SearchBar,
+    Sort,
   },
 });
 </script>
