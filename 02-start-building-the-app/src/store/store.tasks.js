@@ -21,7 +21,7 @@ const state = {
       completed: false,
     },
   },
-  searchBarText: "Testing",
+  searchBarText: "",
 };
 
 const mutations = {
@@ -35,6 +35,9 @@ const mutations = {
     state.tasks[payload.id] = payload.task;
     //const newTask = payload.task;
     //state.tasks = { ...state.tasks, newTask };
+  },
+  setSearchText(state, payload) {
+    state.searchBarText = payload;
   },
 };
 
@@ -53,6 +56,9 @@ const actions = {
     };
 
     commit("addTask", payload);
+  },
+  setSearchText({ commit }, value) {
+    commit("setSearchText", value);
   },
 };
 
@@ -73,7 +79,7 @@ const getters = {
   tasksCompleted: (state) => {
     let tasks = {};
 
-    const taskKeys = Object.keys(state.tasks).forEach(function (key) {
+    Object.keys(state.tasks).forEach(function (key) {
       let task = state.tasks[key];
 
       if (task.completed) {

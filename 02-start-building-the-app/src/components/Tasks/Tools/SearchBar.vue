@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
@@ -23,9 +23,12 @@ export default {
         return this.searchBarText;
       },
       set(value) {
-        console.log(value);
+        this.setSearchText(value);
       },
     },
+  },
+  methods: {
+    ...mapActions("tasks", ["setSearchText"]),
   },
 };
 </script>
