@@ -16,22 +16,12 @@
 </template>
 
 <script>
+import { selectAll } from '../../../../directives/directive-select-all'
+
 export default {
   props: ["name"],
   directives: {
-    selectAll: {
-      mounted(el) {
-        const input = el.querySelector(".q-field__native");
-
-        console.log("TEST");
-
-        input.addEventListener("focus", () => {
-          if (input.value.length) {
-            input.select();
-          }
-        });
-      },
-    },
+    selectAll,
   },
 };
 </script>
