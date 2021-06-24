@@ -15,17 +15,19 @@
       No search results.
     </p>
 
-    <no-tasks
-      @showAddTask="showAddTaskDialog"
-      v-if="!Object.keys(tasksTodo).length && !searchBarText"
-    />
+    <div class="relative-position">
+      <no-tasks
+        @showAddTask="showAddTaskDialog"
+        v-if="!Object.keys(tasksTodo).length && !searchBarText"
+      />
 
-    <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
+      <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
 
-    <tasks-completed
-      v-if="Object.keys(tasksCompleted).length"
-      :tasksCompleted="tasksCompleted"
-    />
+      <tasks-completed
+        v-if="Object.keys(tasksCompleted).length"
+        :tasksCompleted="tasksCompleted"
+      />
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
