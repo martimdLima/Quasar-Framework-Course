@@ -20,6 +20,18 @@ const state = {
       dueTime: "09:30",
       completed: false,
     },
+    ID4: {
+      name: "B",
+      dueDate: "2021/05/28",
+      dueTime: "09:30",
+      completed: false,
+    },
+    ID5: {
+      name: "A",
+      dueDate: "2021/05/28",
+      dueTime: "09:30",
+      completed: false,
+    },
   },
   searchBarText: "",
 };
@@ -63,11 +75,35 @@ const actions = {
 };
 
 const getters = {
+  tasksSorted: (state) => {
+    let tasksSorted = {};
+
+    let keysOrdered = Object.keys(state.tasks);
+
+    keysOrdered.sort((a, b) => {
+      let taskA = state.tasks[a].name.toLowerCase();
+      let taskB = state.tasks[b].name.toLowerCase();
+
+      if (taskA > taskB) {
+        return 1;
+      } else if (taskA < taskB) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    keysOrdered.forEach((key) => {
+      tasksSorted[key] = state.tasks[key];
+    });
+
+    return tasksSorted;
+  },
   tasksTodo: (state, getters) => {
     let tasksFiltered = getters.tasksFiltered;
     let tasks = {};
 
-    Object.keys(tasksFiltered).forEach(function (key) {
+    Object.keys(tasksFiltered).forEach((key) => {
       let task = tasksFiltered[key];
 
       if (!task.completed) {
@@ -91,25 +127,26 @@ const getters = {
 
     return tasks;
   },
-  tasksFiltered: (state) => {
+  tasksFiltered: (state, getters) => {
+    let tasksSorted = getters.tasksSorted;
+
     let filteredTasks = {};
 
     if (state.searchBarText) {
-      Object.keys(state.tasks).forEach(function (key) {
-        let task = state.tasks[key];
+      Object.keys(tasksSorted).forEach(function (key) {
+        let task = tasksSorted[key];
         let taskNameLowerCase = task.name.toLowerCase();
         let searchLowerCase = state.searchBarText.toLowerCase();
 
         if (taskNameLowerCase.includes(searchLowerCase)) {
           filteredTasks[key] = task;
-          //console.log(state.tasks[key])
         }
       });
 
       return filteredTasks;
     }
 
-    return state.tasks;
+    return tasksSorted;
   },
 };
 
