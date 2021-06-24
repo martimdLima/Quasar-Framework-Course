@@ -21,6 +21,7 @@ const state = {
       completed: false,
     },
   },
+  searchBarText: "Testing",
 };
 
 const mutations = {

@@ -13,11 +13,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  data() {
-    return {
-      searchField: "",
-    };
+  computed: {
+    ...mapState("tasks", ["searchBarText"]),
+    searchField() {
+      return this.searchBarText;
+    },
   },
 };
 </script>
