@@ -1,5 +1,5 @@
 <template>
-  <q-form>
+  <q-form @submit.prevent="submitForm">
     <div class="row q-mb-md">
       <q-banner dense class="bg-grey-3 col">
         <template v-slot:avatar>
@@ -19,6 +19,9 @@
         label="Email"
         stack-label
         class="col"
+         :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid Email']"
+         lazy-rules
+        
       />
     </div>
 
@@ -30,12 +33,14 @@
         label="Password"
         stack-label
         class="col"
+         :rules="[ val => val.length <= 6 || 'Please use maximum 6 characters']"
+         lazy-rules
       />
     </div>
 
     <div class="row">
       <q-space />
-      <q-btn color="primary" label="Register" />
+      <q-btn type="submit" color="primary" label="Register" />
     </div>
   </q-form>
 </template>
@@ -49,6 +54,15 @@ export default {
         password: "",
       },
     };
+  },
+  methods: {
+    submitForm() {
+        console.log(this.formData)
+    },
+    isValidEmailAddress(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(String(email).toLowerCase())
+    },
   },
 };
 </script>
