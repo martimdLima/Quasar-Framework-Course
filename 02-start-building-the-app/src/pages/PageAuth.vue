@@ -19,11 +19,11 @@
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="login">
           <div class="text-h6">Login</div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <auth :tab="tab"/>
         </q-tab-panel>
 
         <q-tab-panel name="register">
-          <register />
+          <auth :tab="tab" />
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Register from "../components/Auth/Register.vue";
+import Auth from "../components/Auth/LoginRegister.vue";
 export default {
   data() {
     return {
@@ -39,7 +39,7 @@ export default {
     };
   },
   components: {
-      Register
+      Auth
   }
 };
 </script>
