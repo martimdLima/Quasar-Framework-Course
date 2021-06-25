@@ -1,10 +1,18 @@
 <template>
   <router-view />
 </template>
-<script>
-import { defineComponent } from "vue";
 
-export default defineComponent({
+
+<script>
+import {mapActions} from "vuex";
+
+export default {
   name: "App",
-});
+  methods: {
+    ...mapActions("settings", ["getSavedSettings"])
+  },
+  mounted() {
+    this.getSavedSettings();
+  }
+};
 </script>
