@@ -33,9 +33,18 @@
         </q-item-section>
       </q-item>
 
-       <q-item @click="visitOurWebsite" tag="label" v-ripple>
+      <q-item @click="visitOurWebsite" tag="label" v-ripple>
         <q-item-section>
           <q-item-label>Visit our website</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-icon name="chevron_right" />
+        </q-item-section>
+      </q-item>
+
+      <q-item @click="EmailUs" tag="label" v-ripple>
+        <q-item-section>
+          <q-item-label>Email Us</q-item-label>
         </q-item-section>
         <q-item-section side>
           <q-icon name="chevron_right" />
@@ -47,7 +56,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { openURL } from 'quasar'
+import { openURL } from "quasar";
 
 export default {
   data() {
@@ -59,7 +68,11 @@ export default {
       "setShowTasksInOneList",
     ]),
     visitOurWebsite() {
-      openURL('https://mdlima-resume.firebaseapp.com/')
+      openURL("https://mdlima-resume.firebaseapp.com/");
+    },
+    EmailUs() {
+      window.location.href =
+        "mailto: martim.d.lima@protonmailcom?subject=Awesome Todo Feedback";
     },
   },
   computed: {
