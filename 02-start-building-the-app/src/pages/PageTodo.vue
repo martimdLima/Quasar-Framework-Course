@@ -19,7 +19,7 @@
       <q-scroll-area class="q-scroll-area-tasks">
         <no-tasks
           @showAddTask="showAddTaskDialog"
-          v-if="!Object.keys(tasksTodo).length && !searchBarText"
+          v-if="!Object.keys(tasksTodo).length && !searchBarText && !getSettings.showTasksInOneList"
         />
 
         <tasks-todo
@@ -76,6 +76,7 @@ export default defineComponent({
   },
   computed: {
     ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"]),
+    ...mapGetters("settings", ["getSettings"]),
     ...mapState("tasks", ["searchBarText"]),
   },
   components: {

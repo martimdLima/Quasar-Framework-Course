@@ -125,9 +125,6 @@ export default {
       return this.task.dueTime;
     },
   },
-  mounted() {
-    console.log(this.getSettings.show12HourTimeFormat);
-  },
 };
 </script>
 
