@@ -34,8 +34,9 @@
         />
       </q-scroll-area>
 
-      <div class="absolute-bottom text-center q-mb-lg">
+      <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
         <q-btn
+          class="all-pointer-events"
           @click="showAddTaskDialog"
           round
           color="primary"
