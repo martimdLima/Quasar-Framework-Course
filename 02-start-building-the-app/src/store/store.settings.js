@@ -2,7 +2,7 @@ import { uid } from "quasar";
 
 const state = {
   settings: {
-    show12HourTimeFormat: false,
+    show12HourTimeFormat: true,
   },
 };
 
