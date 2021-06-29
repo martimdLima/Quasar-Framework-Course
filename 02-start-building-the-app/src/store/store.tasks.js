@@ -2,102 +2,10 @@ import { uid } from "quasar";
 import { fb, firebaseAuth, firebaseDb } from "boot/firebase";
 
 const state = {
-  tasks: {
-    /*
-    ID1: {
-      name: "Go to Shop",
-      dueDate: "2021/06/22",
-      dueTime: "18:30",
-      completed: true,
-    },
-    ID2: {
-      name: "Go to Post Office",
-      dueDate: "2021/06/02",
-      dueTime: "14:15",
-      completed: false,
-    },
-    ID3: {
-      name: "Go to the Gym",
-      dueDate: "2021/05/28",
-      dueTime: "09:30",
-      completed: false,
-    },
-    ID4: {
-      name: "B",
-      dueDate: "2021/05/28",
-      dueTime: "09:30",
-      completed: false,
-    },
-    ID5: {
-      name: "A",
-      dueDate: "2021/05/28",
-      dueTime: "09:30",
-      completed: false,
-    },
-    ID6: {
-      name: "D",
-      dueDate: "2021/05/28",
-      dueTime: "09:30",
-      completed: false,
-    },
-    ID7: {
-      name: "C",
-      dueDate: "2021/04/14",
-      dueTime: "14:45",
-      completed: false,
-    },
-    ID8: {
-      name: "E",
-      dueDate: "2021/05/15",
-      dueTime: "19:30",
-      completed: false,
-    },
-    ID9: {
-      name: "G",
-      dueDate: "2021/02/02",
-      dueTime: "11:15",
-      completed: false,
-    },
-    ID10: {
-      name: "F",
-      dueDate: "2021/03/22",
-      dueTime: "18:30",
-      completed: false,
-    },
-    ID11: {
-      name: "H",
-      dueDate: "2021/03/22",
-      dueTime: "18:30",
-      completed: false,
-    },
-    ID12: {
-      name: "I",
-      dueDate: "2021/03/22",
-      dueTime: "18:30",
-      completed: false,
-    },
-    ID13: {
-      name: "J",
-      dueDate: "2021/03/22",
-      dueTime: "18:30",
-      completed: false,
-    },
-    ID14: {
-      name: "K",
-      dueDate: "2021/03/22",
-      dueTime: "18:30",
-      completed: false,
-    },
-    ID15: {
-      name: "L",
-      dueDate: "2021/03/22",
-      dueTime: "18:30",
-      completed: false,
-    },
-    */
-  },
+  tasks: {},
   searchBarText: "",
   sortTerm: "name",
+  tasksDownloaded: false,
 };
 
 const mutations = {
@@ -117,6 +25,9 @@ const mutations = {
   },
   setSortTerm(state, value) {
     state.sortTerm = value;
+  },
+  setTasksDownloaded(state, value) {
+    state.tasksDownloaded = value;
   },
 };
 
@@ -142,12 +53,20 @@ const actions = {
   setSortTerm({ commit }, value) {
     commit("setSortTerm", value);
   },
+  setTasksDownloaded({ commit }, value) {
+    commit("setTasksDownloaded", value);
+  },
   fbReadData({ commit }) {
     let userId = firebaseAuth.currentUser.uid;
 
     let firebaseDb = fb.database();
 
     let userTasks = firebaseDb.ref("tasks/" + userId);
+
+    // initial check for data
+    userTasks.once("value", (snapshot) => {
+      commit("setTasksDownloaded", true);
+    });
 
     // child added
     userTasks.on("child_added", (snapshot) => {
@@ -175,21 +94,21 @@ const actions = {
       commit("deleteTask", taskId);
     });
   },
-	fbAddTask({}, payload) {
-		let userId = firebaseAuth.currentUser.uid
-		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
-		taskRef.set(payload.task)
-	},
+  fbAddTask({}, payload) {
+    let userId = firebaseAuth.currentUser.uid;
+    let taskRef = firebaseDb.ref("tasks/" + userId + "/" + payload.id);
+    taskRef.set(payload.task);
+  },
   fbUpdateTask({}, payload) {
-		let userId = firebaseAuth.currentUser.uid
-		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
-		taskRef.update(payload.updates)
-	},
-	fbDeleteTask({}, taskId) {
-		let userId = firebaseAuth.currentUser.uid
-		let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
-		taskRef.remove()
-	}
+    let userId = firebaseAuth.currentUser.uid;
+    let taskRef = firebaseDb.ref("tasks/" + userId + "/" + payload.id);
+    taskRef.update(payload.updates);
+  },
+  fbDeleteTask({}, taskId) {
+    let userId = firebaseAuth.currentUser.uid;
+    let taskRef = firebaseDb.ref("tasks/" + userId + "/" + taskId);
+    taskRef.remove();
+  },
 };
 
 const getters = {
