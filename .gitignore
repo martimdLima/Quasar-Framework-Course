@@ -43,3 +43,7 @@ next.config.js
 # Ignore all local history of files
 .history
 .ionide
+
+### Environment Files
+*.quasar.env.json
+*.env
