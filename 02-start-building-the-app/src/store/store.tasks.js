@@ -1,5 +1,5 @@
 import { uid } from "quasar";
-import { firebaseAuth } from "boot/firebase";
+import { firebaseAuth, firebaseDb } from "boot/firebase";
 
 const state = {
   tasks: {
@@ -145,9 +145,8 @@ const actions = {
   fbReadData({commit}) {
 
     let userId = firebaseAuth.currentUser.uid
-		//let userTasks = firebaseDb.ref('tasks/' + userId)
 
-    console.log(userId)
+    console.log(userId);
   }
 };
 
