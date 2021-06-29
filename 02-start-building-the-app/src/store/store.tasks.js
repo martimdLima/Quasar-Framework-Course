@@ -1,5 +1,5 @@
 import { uid } from "quasar";
-import { firebaseAuth, firebaseDb } from "boot/firebase";
+import { fb, firebaseAuth, firebaseDb } from "boot/firebase";
 
 const state = {
   tasks: {
@@ -142,12 +142,39 @@ const actions = {
   setSortTerm({ commit }, value) {
     commit("setSortTerm", value);
   },
-  fbReadData({commit}) {
+  fbReadData({ commit }) {
+    let userId = firebaseAuth.currentUser.uid;
 
-    let userId = firebaseAuth.currentUser.uid
+    let firebaseDb = fb.database();
 
-    console.log(userId);
-  }
+    let userTasks = firebaseDb.ref("tasks/" + userId);
+
+    // child added
+    userTasks.on("child_added", (snapshot) => {
+      let task = snapshot.val();
+      let payload = {
+        id: snapshot.key,
+        task: task,
+      };
+      commit("addTask", payload);
+    });
+
+    // child changed
+    userTasks.on("child_changed", (snapshot) => {
+      let task = snapshot.val();
+      let payload = {
+        id: snapshot.key,
+        updates: task,
+      };
+      commit("updateTask", payload);
+    });
+
+    // child removed
+    userTasks.on("child_removed", (snapshot) => {
+      let taskId = snapshot.key;
+      commit("deleteTask", taskId);
+    });
+  },
 };
 
 const getters = {
