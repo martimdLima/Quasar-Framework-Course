@@ -52,6 +52,8 @@ const actions = {
         commit("setLoggedIn", false);
         LocalStorage.set("loggedIn", false);
         this.$router.replace("/auth").catch((err) => {});
+				commit('tasks/clearTasks', null, { root: true })
+				commit('tasks/setTasksDownloaded', false, { root: true })
       }
     });
   },

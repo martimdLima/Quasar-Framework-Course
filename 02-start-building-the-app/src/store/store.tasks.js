@@ -1,5 +1,6 @@
-import { uid } from "quasar";
+import { uid, Notify } from "quasar";
 import { fb, firebaseAuth, firebaseDb } from "boot/firebase";
+import { showErrorMessage } from "src/functions/function-show-error-message";
 
 const state = {
   tasks: {},
@@ -28,6 +29,9 @@ const mutations = {
   },
   setTasksDownloaded(state, value) {
     state.tasksDownloaded = value;
+  },
+  clearTasks(state) {
+    state.tasks = {};
   },
 };
 
@@ -64,9 +68,19 @@ const actions = {
     let userTasks = firebaseDb.ref("tasks/" + userId);
 
     // initial check for data
-    userTasks.once("value", (snapshot) => {
-      commit("setTasksDownloaded", true);
-    });
+    // initial check for data
+    userTasks.once(
+      "value",
+      (snapshot) => {
+        commit("setTasksDownloaded", true);
+      },
+      (error) => {
+        if (error) {
+          showErrorMessage(error.message);
+          this.$router.replace("/auth");
+        }
+      }
+    );
 
     // child added
     userTasks.on("child_added", (snapshot) => {
@@ -97,17 +111,38 @@ const actions = {
   fbAddTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid;
     let taskRef = firebaseDb.ref("tasks/" + userId + "/" + payload.id);
-    taskRef.set(payload.task);
+    taskRef.set(payload.task, (error) => {
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        Notify.create("Task added!");
+      }
+    });
   },
   fbUpdateTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid;
     let taskRef = firebaseDb.ref("tasks/" + userId + "/" + payload.id);
-    taskRef.update(payload.updates);
+    taskRef.update(payload.updates, (error) => {
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        let keys = Object.keys(payload.updates);
+        if (!(keys.includes("completed") && keys.length === 1)) {
+          Notify.create("Task updated!");
+        }
+      }
+    });
   },
   fbDeleteTask({}, taskId) {
     let userId = firebaseAuth.currentUser.uid;
     let taskRef = firebaseDb.ref("tasks/" + userId + "/" + taskId);
-    taskRef.remove();
+    taskRef.remove((error) => {
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        Notify.create("Task deleted!");
+      }
+    });
   },
 };
 
