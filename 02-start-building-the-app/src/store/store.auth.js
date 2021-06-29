@@ -38,7 +38,6 @@ const actions = {
       });
   },
   logoutUser() {
-    //console.log('logoutUser')
     firebaseAuth.signOut();
   },
   handleAuthStateChange({ commit, dispatch }) {
