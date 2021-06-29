@@ -2,8 +2,22 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn  v-if="!loggedIn" flat icon-right="account_circle" label="Login" class="absolute-right" to="/auth"/>
-        <q-btn  v-if="loggedIn" @click="logoutUser" flat icon-right="account_circle" label="Logout" class="absolute-right" />
+        <q-btn
+          v-if="!loggedIn"
+          flat
+          icon-right="account_circle"
+          label="Login"
+          class="absolute-right"
+          to="/auth"
+        />
+        <q-btn
+          v-if="loggedIn"
+          @click="logoutUser"
+          flat
+          icon-right="account_circle"
+          label="Logout"
+          class="absolute-right"
+        />
         <q-toolbar-title class="absolute-center">
           Awesome Todo
         </q-toolbar-title>
@@ -58,8 +72,7 @@
 </template>
 
 <script>
-
-import {mapState, mapActions} from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "MainLayout",
   data() {
@@ -80,11 +93,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions("auth", ["logoutUser"])
+    ...mapActions("auth", ["logoutUser"]),
   },
   computed: {
-    ...mapState("auth", ["loggedIn"])
-  }
+    ...mapState("auth", ["loggedIn"]),
+  },
 };
 </script>
 
