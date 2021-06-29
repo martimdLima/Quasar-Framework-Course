@@ -1,7 +1,9 @@
 import { uid } from "quasar";
+import { firebaseAuth } from "boot/firebase";
 
 const state = {
   tasks: {
+    /*
     ID1: {
       name: "Go to Shop",
       dueDate: "2021/06/22",
@@ -92,6 +94,7 @@ const state = {
       dueTime: "18:30",
       completed: false,
     },
+    */
   },
   searchBarText: "",
   sortTerm: "name",
@@ -139,6 +142,13 @@ const actions = {
   setSortTerm({ commit }, value) {
     commit("setSortTerm", value);
   },
+  fbReadData({commit}) {
+
+    let userId = firebaseAuth.currentUser.uid
+		//let userTasks = firebaseDb.ref('tasks/' + userId)
+
+    console.log(userId)
+  }
 };
 
 const getters = {
