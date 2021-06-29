@@ -62,7 +62,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("auth", ["registerUser"]),
+    ...mapActions("auth", ["registerUser", "loginUser"]),
     submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
@@ -72,6 +72,7 @@ export default {
         this.tab === "login"
       ) {
         console.log("login the user");
+        this.loginUser(this.formData)
       } else {
         console.log("register the user");
         this.registerUser(this.formData);
