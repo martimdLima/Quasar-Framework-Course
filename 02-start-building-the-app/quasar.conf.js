@@ -9,6 +9,10 @@
 /* eslint-env node */
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { configure } = require("quasar/wrappers");
+const {envVars} = require("./src/config/envVars.json");
+
+
+const envparser = require('./src/config/envparser.js')
 
 module.exports = configure(function (ctx) {
   return {
@@ -43,7 +47,19 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
-      env: require("dotenv").config().parsed,
+
+      env: {
+        apiKey: envVars.API_KEY,
+        authDomain: envVars.AUTH_DOMAIN,
+        databaseURL: envVars.DB_URL,
+        projectId: envVars.PROJECT_ID,
+        storageBucket: envVars.STORAGE_BUCKET,
+        messagingSenderId: envVars.MESSAGING_SENDER_ID,
+        appId: envVars.API_KEY,
+        measurementId: envVars.measurementId
+      },
+      
+
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -74,6 +90,7 @@ module.exports = configure(function (ctx) {
       https: false,
       port: 8080,
       open: true, // opens browser window automatically
+      vueDevtools: false
     },
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework

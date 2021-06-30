@@ -2,15 +2,17 @@
   "name": "awesome-todo",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "awesome-todo",
   "author": "martim.lima@jbaysolutions.com",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "icons": "icongenie generate -i src/icon/AppIcon.png --skip-trim"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@vue/devtools": "^5.3.4",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "firebase": "^8.6.8",
@@ -21,6 +23,7 @@
     "@babel/eslint-parser": "^7.13.14",
     "@quasar/app": "^3.0.0",
     "@quasar/quasar-app-extension-qenv": "^1.1.0",
+    "electron": "^13.1.4",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.0.0",
