@@ -52,11 +52,8 @@
       </template>
 
       <template v-else>
-         <span class="absolute-center">
-          <q-spinner
-            color="primary"
-            size="3em"
-          />
+        <span class="absolute-center">
+          <q-spinner color="primary" size="3em" />
         </span>
       </template>
     </div>
@@ -105,9 +102,12 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style lang="scss">
 .q-scroll-area-tasks {
   display: flex;
   flex-grow: 1;
+  .scroll {
+    height: auto !important;
+  }
 }
 </style>

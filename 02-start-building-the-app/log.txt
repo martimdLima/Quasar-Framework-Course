@@ -1,0 +1,22 @@
+
+ Dev mode.......... spa
+ Pkg quasar........ v2.0.0
+ Pkg @quasar/app... v3.0.0
+ Pkg webpack....... v5
+ Debugging......... enabled
+
+ Configured browser support (>= 87.60% of global marketshare):
+ · Chrome for Android >= 91
+ · Firefox for Android >= 89
+ · Android >= 91
+ · Chrome >= 81
+ · Edge >= 88
+ · Firefox >= 80
+ · iOS >= 11.0-11.2
+ · Opera >= 72
+ · Safari >= 11.1
+
+ App • Running "@quasar/qenv" Quasar App Extension...
+ App • Extension(@quasar/qenv): Extending quasar.conf...
+ App • Chaining "UI" Webpack config
+ App •  WAIT  • Compiling of "UI" in progress...

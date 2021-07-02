@@ -191,6 +191,10 @@ module.exports = configure(function (ctx) {
       },
     },
 
+    bin: {
+       "linuxAndroidStudio": "/snap/android-studio/105/android-studio/bin/studio.sh"
+    },
+
     // Full list of options: https://v2.quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
     cordova: {
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing

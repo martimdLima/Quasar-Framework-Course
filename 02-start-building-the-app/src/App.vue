@@ -15,7 +15,6 @@ export default {
   mounted() {
     this.getSavedSettings();
     this.handleAuthStateChange();
-    console.log(process.env.apiKey)
   }
 };
 </script>
